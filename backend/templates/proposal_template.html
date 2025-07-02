@@ -2,39 +2,181 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Коммерческое предложение</title>
+  <title>Code Forge Commercial Offer</title>
   <style>
-    body { font-family: sans-serif; padding: 40px; }
-    h1 { color: #4f46e5; }
-    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-    th, td { padding: 10px; border: 1px solid #ccc; text-align: left; }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #232730;
+      color: #ececec;
+    }
+
+    .page {
+      width: 100vw;
+      min-height: 100vh;
+      box-sizing: border-box;
+      padding: 0;
+    }
+    .header {
+      padding: 32px 36px 12px 36px;
+      background: #232730;
+      border-bottom: 4px solid #fec006;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .logo-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .logo {
+      font-size: 2.1rem;
+      margin-right: 12px;
+      vertical-align: middle;
+    }
+    .main-title {
+      font-size: 2.1rem;
+      color: #fec006;
+      font-weight: bold;
+      margin: 0;
+      letter-spacing: 1.2px;
+    }
+    .subtitle {
+      font-size: 1.2rem;
+      color: #8fa6d6;
+      margin-bottom: 0;
+      margin-top: 6px;
+    }
+    .details {
+      margin: 0;
+      padding: 26px 36px 10px 36px;
+      background: #232730;
+    }
+    .details strong {
+      color: #fec006;
+      min-width: 90px;
+      display: inline-block;
+    }
+    table {
+      width: calc(100% - 72px);
+      margin: 0 36px 30px 36px;
+      background: #272a37;
+      border-collapse: collapse;
+      color: #fff;
+      font-size: 1rem;
+      border-radius: 0;
+      box-shadow: none;
+    }
+    th, td {
+      padding: 13px 10px;
+      border-bottom: 1.5px solid #373f67;
+      text-align: left;
+    }
+    th {
+      background: #232146;
+      color: #fec006;
+      font-weight: bold;
+      border-bottom: 2.5px solid #fec006;
+      font-size: 1.08rem;
+      text-shadow: 0 1px 5px #4f46e5a8;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 38px 36px 0 36px;
+      width: calc(100% - 72px);
+    }
+    .discount-block {
+      background: #1e1f25;
+      color: #b3bcdf;
+      padding: 16px 34px;
+      border-radius: 8px;
+      font-size: 1.15rem;
+      font-weight: 500;
+      box-shadow: none;
+      min-width: 180px;
+    }
+    .total-block {
+      background: #fec006;
+      color: #232146;
+      font-size: 1.18rem;
+      font-weight: bold;
+      padding: 16px 50px;
+      border-radius: 8px;
+      min-width: 230px;
+      text-align: right;
+      box-shadow: none;
+    }
+    .note {
+      margin: 54px 36px 0 36px;
+      font-size: 1rem;
+      color: #b3bcdf;
+      font-style: italic;
+      line-height: 1.5;
+    }
+    .team {
+      color: #fec006;
+      font-weight: 600;
+      letter-spacing: 1.1px;
+    }
   </style>
 </head>
 <body>
-  <h1>Коммерческое предложение</h1>
-  <p><strong>Клиент:</strong> {{ data.client_name }}</p>
-  <p><strong>Компания:</strong> {{ data.company_name }}</p>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Услуга</th>
-        <th>Описание</th>
-        <th>Цена</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for service in data.services %}
-      <tr>
-        <td>{{ service.name }}</td>
-        <td>{{ service.description }}</td>
-        <td>{{ "%.2f"|format(service.price) }} €</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-
-  <p><strong>Скидка:</strong> {{ data.discount }}%</p>
-  <p><strong>Итого:</strong> {{ data.total }} €</p>
+  <div class="page">
+    <div class="header">
+      <div class="logo-row">
+        <span class="logo">🔨</span>
+        <span class="main-title">Code Forge</span>
+      </div>
+      <div class="subtitle">Commercial Offer<br>Your Virtual Smithy</div>
+    </div>
+    <div class="details">
+      <div><strong>Client:</strong> {{ data.client_name }}</div>
+      <div><strong>Company:</strong> {{ data.company_name }}</div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Service</th>
+          <th>Description</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for service in data.services %}
+        <tr>
+          <td>{{ service.name }}</td>
+          <td>{{ service.description }}</td>
+          <td>{{ "%.2f"|format(service.price) }} €</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="summary-row">
+      <div class="discount-block">
+        Discount: <b>{{ data.discount }}%</b>
+      </div>
+      <div class="total-block">
+        Total: {{ "%.2f"|format(data.total) }} €
+      </div>
+    </div>
+    <div class="note">
+      Thank you for forging ideas with us! If you have any questions about this offer,
+      feel free to contact our smiths — we are always ready to shape your success.<br><br>
+      <span class="team">Best regards,<br>Code Forge team</span>
+    </div>
+  </div>
 </body>
 </html>

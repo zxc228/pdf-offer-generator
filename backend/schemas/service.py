@@ -1,14 +1,15 @@
 from pydantic import BaseModel
 
-class ServiceBase(BaseModel):
+class ServiceRead(BaseModel):
+    id: int
     name: str
     description: str | None = None
-
-class ServiceCreate(ServiceBase):
-    pass
-
-class ServiceRead(ServiceBase):
-    id: int
+    price: float
 
     class Config:
         orm_mode = True
+
+class ServiceCreate(BaseModel):
+    name: str
+    description: str | None = None
+    price: float

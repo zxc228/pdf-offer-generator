@@ -19,10 +19,17 @@ def init_db():
     db = SessionLocal()
     if db.query(Service).count() == 0:
         default_services = [
-            Service(name="Website Development", description="Creation of a corporate or landing page website"),
-            Service(name="SEO Promotion", description="Website optimization for search engines"),
-            Service(name="SMM", description="Brand promotion on social media"),
+            {"name": "Website Development", "description": "Full-cycle website creation", "price": 1200},
+            {"name": "SMM", "description": "Brand promotion on social media", "price": 600},
+            {"name": "SEO Optimization", "description": "Improving website ranking in search engines", "price": 800},
+            {"name": "Logo Design", "description": "Unique logo for your business", "price": 350},
+            {"name": "Mobile App Development", "description": "iOS and Android app creation", "price": 2000},
+            {"name": "Technical Support", "description": "Ongoing website and IT support", "price": 300},
+            {"name": "Content Writing", "description": "Professional copywriting for your site", "price": 250},
+            {"name": "UI/UX Audit", "description": "Analysis and improvement of user experience", "price": 400},
+            {"name": "Email Marketing", "description": "Setup and management of email campaigns", "price": 450},
+            {"name": "Cloud Migration", "description": "Moving infrastructure to the cloud", "price": 1500},
         ]
-        db.add_all(default_services)
+        db.add_all([Service(**s) for s in default_services])
         db.commit()
     db.close()
