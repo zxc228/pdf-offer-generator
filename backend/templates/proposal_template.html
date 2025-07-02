@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Коммерческое предложение</title>
+  <style>
+    body { font-family: sans-serif; padding: 40px; }
+    h1 { color: #4f46e5; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { padding: 10px; border: 1px solid #ccc; text-align: left; }
+  </style>
+</head>
+<body>
+  <h1>Коммерческое предложение</h1>
+  <p><strong>Клиент:</strong> {{ data.client_name }}</p>
+  <p><strong>Компания:</strong> {{ data.company_name }}</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Услуга</th>
+        <th>Описание</th>
+        <th>Цена</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for service in data.services %}
+      <tr>
+        <td>{{ service.name }}</td>
+        <td>{{ service.description }}</td>
+        <td>{{ "%.2f"|format(service.price) }} €</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <p><strong>Скидка:</strong> {{ data.discount }}%</p>
+  <p><strong>Итого:</strong> {{ data.total }} €</p>
+</body>
+</html>
