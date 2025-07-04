@@ -7,7 +7,6 @@ COPY tsconfig.json ./
 COPY next.config.ts ./
 COPY postcss.config.mjs ./
 COPY eslint.config.mjs ./
-COPY public ./public
 COPY src ./src
 
 RUN npm install --frozen-lockfile
@@ -17,12 +16,12 @@ FROM node:20-alpine
 WORKDIR /app
 
 COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/public ./public
 COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/next.config.ts ./
 COPY --from=builder /app/postcss.config.mjs ./
 COPY --from=builder /app/eslint.config.mjs ./
 COPY --from=builder /app/src ./src
+COPY --from=builder /app/tsconfig.json ./
 
 RUN npm ci --omit=dev
 

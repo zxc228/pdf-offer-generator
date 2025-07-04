@@ -40,6 +40,14 @@ Includes a modern Next.js frontend and a FastAPI backend. The manager fills out 
 ### 1. Using Docker (recommended)
 
 > Runs both frontend and backend together.
+1. Go to `/backend`  
+2. Copy environment variables and install dependencies:
+
+    ```bash
+    cd backend
+    cp .env.example .env
+    cd ..
+```
 
 ```bash
 docker compose up --build
